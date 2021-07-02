@@ -24,6 +24,7 @@ public class MapBasedRiderDao implements RiderDao {
         riderDetails.put(rider.getId(), rider);
     }
 
+    @Override
     public void addRideToRider(Ride ride) {
         if (rideMap.containsKey(ride.getRiderId())) {
             rideMap.get(ride.getRideId()).add(ride.getRideId());

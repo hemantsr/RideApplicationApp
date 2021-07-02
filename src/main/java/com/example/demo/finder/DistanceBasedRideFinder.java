@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Component
 public class DistanceBasedRideFinder implements RideFinder {
@@ -23,12 +24,12 @@ public class DistanceBasedRideFinder implements RideFinder {
 
     @Override
     public List<Cab> findRides(Location userLocation) {
-        List<String> freeCabs = cabDao.getFreeCabs();
+        Set<String> freeCabs = cabDao.getFreeCabs();
         return getFreeRidesInCircle(userLocation, freeCabs);
     }
 
     private List<Cab> getFreeRidesInCircle(Location location,
-                                           List<String> freeCabs) {
+                                           Set<String> freeCabs) {
 
         List<Cab> allowedCabs = new ArrayList<>();
         for (String cabId : freeCabs) {

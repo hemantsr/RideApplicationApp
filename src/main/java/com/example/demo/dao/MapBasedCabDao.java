@@ -4,24 +4,21 @@ import com.example.demo.model.Cab;
 import com.example.demo.model.Location;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Component
 public class MapBasedCabDao implements CabDao {
 
     private final HashMap<String, Cab> cabDetails;
     private final HashMap<String, Location> cabLocation;
-    private final List<String> freeCabs;
-    private final List<String> occupiedCabs;
+    private final Set<String> freeCabs;
+    private final Set<String> occupiedCabs;
 
     public MapBasedCabDao() {
         this.cabDetails = new HashMap<>();
         cabLocation = new HashMap<>();
-        freeCabs = new ArrayList<>();
-        occupiedCabs = new ArrayList<>();
+        freeCabs = new HashSet<>();
+        occupiedCabs = new HashSet<>();
     }
 
     @Override
@@ -55,7 +52,7 @@ public class MapBasedCabDao implements CabDao {
     }
 
     @Override
-    public List<String> getFreeCabs() {
+    public Set<String> getFreeCabs() {
         return freeCabs;
     }
 

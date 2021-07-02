@@ -3,8 +3,8 @@ package com.example.demo.dao;
 import com.example.demo.model.Cab;
 import com.example.demo.model.Location;
 
-import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 public interface CabDao {
 
@@ -16,6 +16,6 @@ public interface CabDao {
     public Location getCabLocation(final String cabId);
 
     public void bookCab(final String cabId);
-    public List<String> getFreeCabs();
+    public Set<String> getFreeCabs();
     public void deActivcateCab(String cabId);
 }

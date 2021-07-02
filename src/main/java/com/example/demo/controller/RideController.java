@@ -1,9 +1,6 @@
 package com.example.demo.controller;
 
-import com.example.demo.dao.CabDao;
-import com.example.demo.dao.MapBasedCabDao;
-import com.example.demo.dao.MapBasedRideDao;
-import com.example.demo.dao.RideDao;
+import com.example.demo.dao.*;
 import com.example.demo.finder.DistanceBasedRideFinder;
 import com.example.demo.finder.RideFinder;
 import com.example.demo.model.Cab;
@@ -24,14 +21,17 @@ public class RideController {
     private final CabDao cabDao;
     private final RideDao rideDao;
     private final RideFinder rideFinder;
+    private final RiderDao riderDao;
 
     @Autowired
     public RideController(final MapBasedCabDao mapBasedCabDao,
                           final MapBasedRideDao mapBasedRideDao,
-                          final DistanceBasedRideFinder rideFinder) {
+                          final DistanceBasedRideFinder rideFinder,
+                          final MapBasedRiderDao riderDao) {
         this.cabDao = mapBasedCabDao;
         this.rideDao = mapBasedRideDao;
         this.rideFinder = rideFinder;
+        this.riderDao = riderDao;
     }
 
     @PostMapping("/ride/getFreeCabs")
@@ -43,6 +43,7 @@ public class RideController {
     public String bookRide(@RequestBody RideBookingRequest request) {
        Ride ride =  buildRide(request.getRiderId(), request.getCabId(), request.getStart(), request.getEnd());
         rideDao.addRide(ride);
+        riderDao.addRideToRider(ride);
         return ride.getRideId();
     }
 
